@@ -1,0 +1,37 @@
+pipeline:
+  python2:
+    when:
+      branch: master
+      event: push
+    image: kernel528/python:2.7.15
+    secrets: [ docker_username, docker_password ]
+    commands:
+      - "uname -a"
+      - "cat /etc/alpine-release"
+      - "python --version"
+
+  python3:
+    when:
+      branch: master
+      event: push
+    image: kernel528/python:3.6.7
+    secrets: [ docker_username, docker_password ]
+    commands:
+      - "uname -a"
+      - "cat /etc/alpine-release"
+      - "python --version"
+
+  # Post notification to orpheus-alerts slack channel
+  slack:
+    when:
+      status:
+        - success
+        - failure
+      event:
+        - push
+        - tag
+    image: plugins/slack
+    channel: orpheus-alerts
+    webhook: https://hooks.slack.com/services/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
+    template: >
+      Drone build {{uppercase build.status}} for {{ build.link }} with git commit {{ truncate build.commit 8 }} to git branch ({{ build.branch }}) by {{ build.author }}.
