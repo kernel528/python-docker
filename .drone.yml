@@ -1,16 +1,16 @@
 pipeline:
-  docker-python2:
+  docker-python3:
     when:
-      branch: 2.7
+      branch: 3.6
       event: push
     image: plugins/docker
     repo: kernel528/python
     secrets: [ docker_username, docker_password ]
-    dockerfile: 2.7/Dockerfile
+    dockerfile: 3.6/Dockerfile
     tag:
       - latest
-      - 2.7.15
-      - 2.7.15-${DRONE_COMMIT:0:8}
+      - 3.6.7
+      - 3.6.7-${DRONE_COMMIT:0:8}
 
   # Post notification to edabi-infra-alerts slack channel
   slack:
