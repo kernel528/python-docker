@@ -1,0 +1,28 @@
+pipeline:
+  docker-python2:
+    when:
+      branch: 2.7
+      event: push
+    image: plugins/docker
+    repo: kernel528/python
+    secrets: [ docker_username, docker_password ]
+    dockerfile: 2.7/Dockerfile
+    tag:
+      - latest
+      - 2.7.15
+      - 2.7.15-${DRONE_COMMIT:0:8}
+
+  # Post notification to edabi-infra-alerts slack channel
+  slack:
+    when:
+      status:
+        - success
+        - failure
+      event:
+        - push
+        - tag
+    image: plugins/slack
+    channel: orpheus-alerts
+    webhook: https://hooks.slack.com/services/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
+    template: >
+      Drone build {{uppercase build.status}} for {{ build.link }} with git commit {{ truncate build.commit 8 }} to git branch ({{ build.branch }}) by {{ build.author }}.
