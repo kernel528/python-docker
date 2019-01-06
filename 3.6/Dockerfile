@@ -1,4 +1,4 @@
-FROM kernel528/alpine:3.8.1
+FROM kernel528/alpine:3.8.2
 LABEL maintainer=kernel528
 
 # ensure local python is preferred over distribution python
