@@ -6,11 +6,11 @@ pipeline:
     image: plugins/docker
     repo: kernel528/python
     secrets: [ docker_username, docker_password ]
-    dockerfile: 3.6/Dockerfile
+    dockerfile: 3.7/Dockerfile
     tag:
       - latest
-      - 3.6.7
-      - 3.6.7-${DRONE_COMMIT:0:8}-drone-build-${DRONE_BUILD_NUMBER}
+      - 3.7.2
+      - 3.7.2-${DRONE_COMMIT:0:8}-drone-build-${DRONE_BUILD_NUMBER}
 
   # Post notification to edabi-infra-alerts slack channel
   slack:
