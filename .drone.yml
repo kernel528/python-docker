@@ -3,7 +3,7 @@ pipeline:
     when:
       branch: master
       event: push
-    image: kernel528/python:2.7.15
+    image: kernel528/python:latest
     secrets: [ docker_username, docker_password ]
     commands:
       - "uname -a"
@@ -14,7 +14,7 @@ pipeline:
     when:
       branch: master
       event: push
-    image: kernel528/python:3.6.7
+    image: kernel528/python:latest
     secrets: [ docker_username, docker_password ]
     commands:
       - "uname -a"
