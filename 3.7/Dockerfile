@@ -1,5 +1,5 @@
 FROM kernel528/alpine:3.8.2
-LABEL maintainer=kernel528
+LABEL maintainer=kernel528@gmail.com
 
 # ensure local python is preferred over distribution python
 ENV PATH /usr/local/bin:$PATH
