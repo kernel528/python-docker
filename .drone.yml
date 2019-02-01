@@ -1,15 +1,4 @@
 pipeline:
-  python2:
-    when:
-      branch: master
-      event: push
-    image: kernel528/python:latest
-    secrets: [ docker_username, docker_password ]
-    commands:
-      - "uname -a"
-      - "cat /etc/alpine-release"
-      - "python --version"
-
   python3:
     when:
       branch: master
