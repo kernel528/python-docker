@@ -1,4 +1,5 @@
 FROM kernel528/alpine:3.8.2
+
 LABEL maintainer=kernel528@gmail.com
 
 # ensure local python is preferred over distribution python
@@ -99,7 +100,7 @@ RUN cd /usr/local/bin \
 	&& ln -s python3-config python-config
 
 # if this is called "PIP_VERSION", pip explodes with "ValueError: invalid truth value '<VERSION>'"
-ENV PYTHON_PIP_VERSION 18.0
+ENV PYTHON_PIP_VERSION 19.0
 
 RUN set -ex; \
 	\
