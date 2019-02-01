@@ -11,7 +11,8 @@ ENV LANG C.UTF-8
 
 # install ca-certificates so that HTTPS works consistently
 # other runtime dependencies for Python are installed later
-RUN apk add --no-cache ca-certificates
+RUN apk add --no-cache ca-certificates \
+ && rm -rf /var/cache/apk/*
 
 ENV GPG_KEY 0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D
 ENV PYTHON_VERSION 3.7.2
@@ -91,6 +92,9 @@ RUN set -ex \
 	&& rm -rf /usr/src/python \
 	\
 	&& python3 --version
+
+# Cleanup
+RUN rm -rf /var/cache/apk/*
 
 # make some useful symlinks that are expected to exist
 RUN cd /usr/local/bin \
