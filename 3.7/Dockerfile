@@ -1,4 +1,4 @@
-FROM kernel528/alpine:3.8.2
+FROM kernel528/alpine:3.9.0
 
 LABEL maintainer=kernel528@gmail.com
 
