@@ -1,4 +1,4 @@
-FROM kernel528/alpine:3.9.0
+FROM kernel528/alpine:3.9.2
 
 LABEL maintainer=kernel528@gmail.com
 
@@ -104,7 +104,7 @@ RUN cd /usr/local/bin \
 	&& ln -s python3-config python-config
 
 # if this is called "PIP_VERSION", pip explodes with "ValueError: invalid truth value '<VERSION>'"
-ENV PYTHON_PIP_VERSION 19.0
+ENV PYTHON_PIP_VERSION 19.0.3
 
 RUN set -ex; \
 	\
