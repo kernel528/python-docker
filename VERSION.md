@@ -4,3 +4,4 @@
 * v1.2.0 - Updated to v3.7.2
 * v2.0.0 - Updated to use alpine 3.9 and run on drone 1.0.0-rc5
 * v2.1.0 - Updated to use alpine 3.9.2
+* v2.2.0 - Updated to use the latest alpine 3.9.2 and folder structure
