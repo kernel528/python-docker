@@ -1,4 +1,4 @@
-FROM kernel528/alpine:3.9.2
+FROM kernel528/alpine:3.9.4
 
 LABEL maintainer=kernel528@gmail.com
 
@@ -15,7 +15,7 @@ RUN apk add --no-cache ca-certificates \
  && rm -rf /var/cache/apk/*
 
 ENV GPG_KEY 0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D
-ENV PYTHON_VERSION 3.7.2
+ENV PYTHON_VERSION 3.7.3
 
 RUN set -ex \
 	&& apk add --no-cache --virtual .fetch-deps \
@@ -104,7 +104,7 @@ RUN cd /usr/local/bin \
 	&& ln -s python3-config python-config
 
 # if this is called "PIP_VERSION", pip explodes with "ValueError: invalid truth value '<VERSION>'"
-ENV PYTHON_PIP_VERSION 19.0.3
+ENV PYTHON_PIP_VERSION 19.1.1
 
 RUN set -ex; \
 	\
