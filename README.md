@@ -1,6 +1,6 @@
 [![Build Status](http://drone.kernelsanders.biz/api/badges/kernel528/python-docker/status.svg)](http://drone.kernelsanders.biz/kernel528/python-docker)
 
-# orpheus-python suite of docker images.
+# orpheus-python docker images.
 
 ### Comments
 * The Dockerfile is unique to each python version, and is stored based on python version.
