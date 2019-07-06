@@ -1,10 +1,10 @@
 [![Build Status](http://drone.kernelsanders.biz/api/badges/kernel528/python-docker/status.svg)](http://drone.kernelsanders.biz/kernel528/python-docker)
 
-# This repo is used to build the orpheus-base-python suite of docker images.
+# orpheus-python suite of docker images.
 
 ### Comments
 * The Dockerfile is unique to each python version, and is stored based on python version.
-* This image uses the orpheus-base-alpine3 as its base image.
+* This image uses the orpheus-alpine3 as its base image.
 * The official docker hub repo is used as a template to install python:  
   * 3.7: https://github.com/docker-library/python/blob/master/3.7/alpine3.8/Dockerfile
 
