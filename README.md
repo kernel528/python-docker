@@ -6,7 +6,6 @@
 * The Dockerfile is unique to each python version, and is stored based on python version.
 * This image uses the orpheus-alpine3 as its base image.
 * The official docker hub repo is used as a template to install python:  
-  * 3.8: https://github.com/docker-library/python/blob/master/3.8-rc/alpine3.9/Dockerfile
   * 3.8: https://github.com/docker-library/python/blob/master/3.8
 
 #### How To build Manually:
