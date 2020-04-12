@@ -5,3 +5,4 @@
 * v1.2.0 - Updated to use alpine 3.9.2
 * v2.0.0 - Updated folder struture and to use latest alpine 3.9.2 build
 * v2.0.1 - Added python 3.8.0a4.  Alipne 3.9.4, pip 19.1.1
+* v3.0.0 - Added python 3.8.2, Alpine 3.10.4, pip 20.0.2
