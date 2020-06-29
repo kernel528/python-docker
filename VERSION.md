@@ -9,4 +9,5 @@
 * v3.1.0 - Updated to alpine 3.11.5
 * v3.1.1 - Updated to alpine 3.11.6
 * v3.1.2 - Updated to trigger drone build.
-* v3.1.2 - Drone trigger
+* v4.0.0 - Updated to alpine 3.12.0, python 3.8.3 and pip 20.1.1
+* v4.0.0 - Drone trigger
