@@ -9,3 +9,4 @@
 * v3.1.0 - Updated to alpine 3.11.5
 * v3.1.1 - Updated to alpine 3.11.6
 * v3.1.2 - Updated to trigger drone build.
+* v3.1.2 - Drone trigger
