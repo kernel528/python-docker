@@ -9,7 +9,7 @@
   * 3.8: https://github.com/docker-library/python/blob/master/3.8
 
 #### How To build Manually:
-``docker image build -t kernel528/python:3.8.2 -f 3.7/Dockerfile .``
+``docker image build -t kernel528/python:3.8.6 -f 3.8/Dockerfile .``
 
 #### How to use:
 * By default the image has a CMD set to run python2 or python3 depending on the image.  You can pass python logic as command input to the container, or simply run the container and it will present the python prompt.

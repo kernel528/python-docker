@@ -7,3 +7,4 @@
 * v2.2.0 - Updated to use the latest alpine 3.9.2 and folder structure
 * v3.0.0 - Updated to alpine 3.10.4, python 3.8.2 and pip 20.0.2
 * v3.0.1 - Updated to trigger drone build.
+* v3.0.2 - Updated to alpine 3.12.2, pythong 3.8.6, pip 20.3.1
