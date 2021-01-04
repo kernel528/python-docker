@@ -13,3 +13,4 @@
 * v4.0.0 - Drone trigger, 2
 * v4.0.1 - Updated to v3.8.5 and pip v20.2.1
 * v4.0.2 - Updated to v3.8.6 pip v20.3.1 and alpine v3.12.2
+* v4.1.0 - Updated to v3.8.7, pip v20.3.3 and alpine v3.12.3
