@@ -1,7 +1,7 @@
 pipeline:
   docker-python3:
     when:
-      branch: 3.10
+      branch: 3.10.1
       event: push
     image: plugins/docker
     repo: kernel528/python
