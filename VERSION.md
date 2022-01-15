@@ -15,3 +15,4 @@
 * v4.0.2 - Updated to v3.8.6 pip v20.3.1 and alpine v3.12.2
 * v4.1.0 - Updated to v3.8.7, pip v20.3.3 and alpine v3.12.3
 * v5.0.0 - Updated to v3.8.12, pip v21.2.4 and alpine v3.14.2
+* v6.0.0 - Updated to python v3.10.1, pip v21.2.4 and alpine v3.15.0

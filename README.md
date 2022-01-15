@@ -7,6 +7,7 @@
 * This image uses the orpheus-alpine3 as its base image.
 * The official docker hub repo is used as a template to install python:  
   * 3.8: https://github.com/docker-library/python/blob/master/3.8
+  * 3.10: https://github.com/docker-library/python/blob/master/3.10/alpine3.15/Dockerfile
 
 #### How To build Manually:
 ``docker image build -t kernel528/python:3.8.2 -f Dockerfile .``
