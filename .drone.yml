@@ -25,7 +25,7 @@ steps:
         from_secret: docker_username
       password:
         from_secret: docker_password
-      repo: kernel528/httpd
+      repo: kernel528/python
       tags:
         - latest
         - 3.13.0
