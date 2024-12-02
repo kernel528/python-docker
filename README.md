@@ -1,12 +1,10 @@
-[![Build Status](http://drone.kernelsanders.biz:81/api/badges/kernel528/python-docker/status.svg)](http://drone.kernelsanders.biz:81/kernel528/python-docker)
-
-# orpheus-python docker images.
+[![Build Status](http://drone.kernelsanders.biz:8080/api/badges/kernel528/python-docker/status.svg)](http://drone.kernelsanders.biz:8080/kernel528/python-docker)
 
 ### Comments
 * The Dockerfile is unique to each python version, and is stored based on python version.
 * This image uses the orpheus-alpine3 as its base image.
 * The official docker hub repo is used as a template to install python:  
-  * 3.8: https://github.com/docker-library/python/blob/master/3.8
+  * 3.13: https://github.com/docker-library/python/blob/master/3.13/alpine3.20/Dockerfile
 
 #### How To build Manually:
 ``docker image build -t kernel528/python:3.8.6 -f 3.8/Dockerfile .``
@@ -18,7 +16,6 @@ docker run -it --rm --name python3 --hostname python3 kernel528/python:3.8.2
 Python 3.8.2 (default, Aug 27 2017, 06:14:56)
 [GCC 6.3.0] on linux
 Type "help", "copyright", "credits" or "license" for more information.
->>>
 ```
 
 ### Authors
