@@ -14,12 +14,15 @@ trigger:
 
 # Pipeline steps
 steps:
+
   # Build image
   - name: docker-build
     image: plugins/docker
     when:
       branch:
         - '3.13'
+      when:
+        - push
     settings:
       username:
         from_secret: docker_username
@@ -37,6 +40,8 @@ steps:
     when:
       branch:
         - main
+      when:
+        - push
     commands:
       - cat /etc/alpine-release
       - "python --version"
