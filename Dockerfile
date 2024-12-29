@@ -1,6 +1,9 @@
-FROM kernel528/alpine:3.20.3
+FROM kernel528/alpine:3.21.0
 
 LABEL maintainer=kernel528@gmail.com
+
+# Set User to be root
+USER root
 
 # ensure local python is preferred over distribution python
 ENV PATH /usr/local/bin:$PATH

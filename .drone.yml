@@ -1,29 +1,22 @@
 kind: pipeline
 type: docker
-name: python-image-build
+name: build-versioned-image
 
-# Trigger conditions
 trigger:
   branch:
     - '3.13'
-    - main
   event:
-    - custom
-    - push
     - pull_request
 
-# Pipeline steps
+# Build the docker image for amd64 architecture
 steps:
-
-  # Build image
-  - name: docker-build
+  - name: version-docker-image-build
     image: plugins/docker
-    when:
-      branch:
-        - '3.13'
-      when:
-        - push
+    environment:
+      DOCKER_BUILDKIT: 1
     settings:
+      platforms:
+        - linux/amd64
       username:
         from_secret: docker_username
       password:
@@ -31,11 +24,33 @@ steps:
       repo: kernel528/python
       tags:
         - latest
-        - 3.13.0
-        - 3.13.0-${DRONE_COMMIT:0:8}-drone-build-${DRONE_BUILD_NUMBER}
+        - 3.13.0-drone-build-${DRONE_BUILD_NUMBER}
 
-  # Test image
-  - name: docker-test
+  # Slack notification
+  - name: slack-notification
+    image: plugins/slack
+    when:
+      status:
+        - failure
+        - success
+    settings:
+      webhook:
+        from_secret: slack_webhook_drone_alerts
+
+---
+
+kind: pipeline
+type: docker
+name: test-main-image
+
+trigger:
+  branch:
+    - main
+  event:
+    - push
+
+steps:
+  - name: main-docker-image-test
     image: kernel528/python:latest
     when:
       branch:
@@ -47,12 +62,47 @@ steps:
       - "python --version"
 
   # Slack notification
-  - name: notify
+  - name: slack-notification
     image: plugins/slack
-    settings:
-      webhook:
-        from_secret: slack_webhook_drone_alerts
     when:
       status:
         - failure
         - success
+    settings:
+      webhook:
+        from_secret: slack_webhook_drone_alerts
+
+---
+kind: pipeline
+type: docker
+name: build-tagged-image
+
+trigger:
+  event:
+    - tag
+
+# Build the docker image for the tagged release
+steps:
+  - name: tag-docker-image-build
+    image: plugins/docker
+    environment:
+      DOCKER_BUILDKIT: 1
+    settings:
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+      repo: kernel528/python
+      tags:
+        - ${DRONE_TAG}
+
+  # Slack notification
+  - name: slack-notification
+    image: plugins/slack
+    when:
+      status:
+        - failure
+        - success
+    settings:
+      webhook:
+        from_secret: slack_webhook_drone_alerts

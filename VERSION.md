@@ -17,3 +17,4 @@
 * v3.8.12 - Updated to v3.8.12, pip v21.2.4 and alpine v3.14.2
 * v3.10.1 - Updated to python v3.10.1, pip v21.2.4 and alpine v3.15.0 - Trigger 1
 * v3.13.0 - Updated to python v3.13.0 and kernel528/alpine:3.20.3
+* v3.13.0a - Updated to python v3.13.0 and kernel528/alpine:3.21.0.  Tagged: kernel528/python:3.13.0
