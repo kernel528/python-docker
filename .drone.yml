@@ -10,7 +10,7 @@ trigger:
 
 # Build the docker image for amd64 architecture
 steps:
-  - name: docker-build
+  - name: version-docker-image-build
     image: plugins/docker
     environment:
       DOCKER_BUILDKIT: 1
@@ -50,7 +50,7 @@ trigger:
     - push
 
 steps:
-  - name: docker-image-test
+  - name: main-docker-image-test
     image: kernel528/python:latest
     when:
       branch:
