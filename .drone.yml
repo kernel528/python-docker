@@ -2,7 +2,6 @@ kind: pipeline
 type: docker
 name: build-versioned-image
 
-# Trigger conditions
 trigger:
   branch:
     - '3.13'
@@ -38,7 +37,6 @@ steps:
       webhook:
         from_secret: slack_webhook_drone_alerts
 
-
 ---
 
 kind: pipeline
@@ -46,10 +44,10 @@ type: docker
 name: test-main-image
 
 trigger:
-  - branch:
-      - main
-  - event:
-      - push
+  branch:
+    - main
+  event:
+    - push
 
 steps:
   - name: docker-image-test
