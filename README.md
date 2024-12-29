@@ -2,7 +2,7 @@
 [![Latest Version](https://img.shields.io/github/v/tag/kernel528/python-docker)](https://github.com/kernel528/python-docker/releases/latest)
 [![Docker Pulls](https://img.shields.io/docker/pulls/kernel528/python)](https://hub.docker.com/r/kernel528/python)
 [![Docker Image Version (latest semver)](https://img.shields.io/docker/v/kernel528/python?sort=semver)](https://hub.docker.com/r/kernel528/python)
-[![Docker Image Size (tag)](https://img.shields.io/docker/image-size/kernel528/python/2.4.62)](https://hub.docker.com/r/kernel528/python/2.4.62)
+[![Docker Image Size (tag)](https://img.shields.io/docker/image-size/kernel528/python)](https://hub.docker.com/r/kernel528/python)
 
 ### Comments
 - The Dockerfile is unique to each python version, and is stored based on python version.
