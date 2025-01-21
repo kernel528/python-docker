@@ -11,7 +11,7 @@
   - 3.13: https://github.com/docker-library/python/blob/master/3.13/alpine3.21/Dockerfile
 
 #### How To build Manually:
-``docker image build -t kernel528/python:3.13.0 -f 3.13/Dockerfile .``
+``docker image build -t kernel528/python:3.13.1 -f 3.13/Dockerfile .``
 
 #### How to use:
 -By default the image has a CMD set to run python2 or python3 depending on the image.  You can pass python logic as command input to the container, or simply run the container and it will present the python prompt.
