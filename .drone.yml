@@ -4,28 +4,28 @@ name: build-versioned-image
 
 trigger:
   branch:
-    - '3.13'
+    - '3.13-arm64'
   event:
     - pull_request
 
 # Build the docker image for amd64 architecture
 steps:
-  - name: version-docker-image-build
+  - name: docker-image-build
     image: plugins/docker
     environment:
       DOCKER_BUILDKIT: 1
     settings:
       platforms:
-        - linux/amd64
+        - linux/arm64
       username:
         from_secret: docker_username
       password:
         from_secret: docker_password
       repo: kernel528/python
       tags:
-        - latest
-        - 3.13.2
-        - 3.13.2-drone-build-${DRONE_BUILD_NUMBER}
+        - latest-arm64
+        - 3.13.2-arm64
+        - 3.13.2-drone-build-${DRONE_BUILD_NUMBER}-arm64
 
   # Slack notification
   - name: slack-notification
@@ -46,16 +46,16 @@ name: test-main-image
 
 trigger:
   branch:
-    - main
+    - main-arm64
   event:
     - push
 
 steps:
   - name: main-docker-image-test
-    image: kernel528/python:latest
+    image: kernel528/python:latest-arm64
     when:
       branch:
-        - main
+        - main-arm64
       when:
         - push
     commands:
@@ -95,7 +95,7 @@ steps:
         from_secret: docker_password
       repo: kernel528/python
       tags:
-        - ${DRONE_TAG}
+        - ${DRONE_TAG}-arm64
 
   # Slack notification
   - name: slack-notification
