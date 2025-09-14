@@ -1,4 +1,4 @@
-FROM kernel528/alpine:3.22.1
+FROM kernel528/alpine:3.22.1.09
 
 LABEL maintainer=kernel528@gmail.com
 
@@ -16,8 +16,8 @@ RUN set -eux; \
 	;
 
 ENV GPG_KEY 7169605F62C751356D054A26A821E680E5FA6305
-ENV PYTHON_VERSION 3.13.5
-ENV PYTHON_SHA256 93e583f243454e6e9e4588ca2c2662206ad961659863277afcdb96801647d640
+ENV PYTHON_VERSION 3.13.7
+ENV PYTHON_SHA256 5462f9099dfd30e238def83c71d91897d8caa5ff6ebc7a50f14d4802cdaaa79a
 
 RUN set -eux; \
 	\
@@ -70,7 +70,7 @@ RUN set -eux; \
 		--enable-loadable-sqlite-extensions \
 		--enable-option-checking=fatal \
 		--enable-shared \
-		$(test "$gnuArch" != 'riscv64-linux-musl' && echo '--with-lto') \
+		$(test "${gnuArch%%-*}" != 'riscv64' && echo '--with-lto') \
 		--with-ensurepip \
 	; \
 	nproc="$(nproc)"; \
