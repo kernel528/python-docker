@@ -8,7 +8,7 @@
 - The Dockerfile is unique to each python version, and is stored based on python version.
 - This image uses the `kernel528/alpine` as its base image.
 - The official docker hub repo is used as a template to install python:  
-  - 3.13: https://github.com/docker-library/python/blob/master/3.13/alpine3.21/Dockerfile
+  - 3.13: https://github.com/docker-library/python/blob/master/3.13/alpine3.22/Dockerfile
 
 #### How To build Manually:
 ``docker image build -t kernel528/python:3.13.1 -f 3.13/Dockerfile .``
