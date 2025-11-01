@@ -4,7 +4,7 @@ name: build-versioned-image
 
 trigger:
   branch:
-    - '3.13'
+    - '3.14'
   event:
     - pull_request
 
@@ -24,8 +24,8 @@ steps:
       repo: kernel528/python
       tags:
         - latest
-        - 3.13.7
-        - 3.13.7-drone-build-${DRONE_BUILD_NUMBER}
+        - 3.14.0
+        - 3.14.0-drone-build-${DRONE_BUILD_NUMBER}
 
   # Slack notification
   - name: slack-notification
