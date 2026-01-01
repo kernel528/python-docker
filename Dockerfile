@@ -1,4 +1,4 @@
-FROM kernel528/alpine:3.22.2
+FROM kernel528/alpine:3.23.2
 
 LABEL maintainer=kernel528@gmail.com
 
@@ -15,8 +15,8 @@ RUN set -eux; \
 		tzdata \
 	;
 
-ENV PYTHON_VERSION 3.14.0
-ENV PYTHON_SHA256 2299dae542d395ce3883aca00d3c910307cd68e0b2f7336098c8e7b7eee9f3e9
+ENV PYTHON_VERSION 3.14.2
+ENV PYTHON_SHA256 ce543ab854bc256b61b71e9b27f831ffd1bfd60a479d639f8be7f9757cf573e9
 
 RUN set -eux; \
 	\

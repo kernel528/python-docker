@@ -10,6 +10,7 @@
 - The official docker hub repo is used as a template to install python:  
   - 3.13: https://github.com/docker-library/python/blob/master/3.13/alpine3.22/Dockerfile
   - 3.14: https://github.com/docker-library/python/blob/master/3.14/alpine3.22/Dockerfile
+  - 3.14: https://github.com/docker-library/python/blob/master/3.14/alpine3.23/Dockerfile
 
 #### How To build Manually:
 ``docker image build -t kernel528/python:3.13.1 -f 3.13/Dockerfile .``
