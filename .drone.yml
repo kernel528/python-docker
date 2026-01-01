@@ -24,8 +24,8 @@ steps:
       repo: kernel528/python
       tags:
         - latest
-        - 3.14.0
-        - 3.14.0-drone-build-${DRONE_BUILD_NUMBER}
+        - 3.14.2
+        - 3.14.2-drone-build-${DRONE_BUILD_NUMBER}
 
   # Slack notification
   - name: slack-notification
