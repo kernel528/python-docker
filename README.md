@@ -4,27 +4,34 @@
 [![Docker Image Version (latest semver)](https://img.shields.io/docker/v/kernel528/python?sort=semver)](https://hub.docker.com/r/kernel528/python)
 [![Docker Image Size (tag)](https://img.shields.io/docker/image-size/kernel528/python)](https://hub.docker.com/r/kernel528/python)
 
-### Comments
-- The Dockerfile is unique to each python version, and is stored based on python version.
-- This image uses the `kernel528/alpine` as its base image.
-- The official docker hub repo is used as a template to install python:  
-  - 3.13: https://github.com/docker-library/python/blob/master/3.13/alpine3.22/Dockerfile
-  - 3.14: https://github.com/docker-library/python/blob/master/3.14/alpine3.22/Dockerfile
-  - 3.14: https://github.com/docker-library/python/blob/master/3.14/alpine3.23/Dockerfile
+## Overview
+- Base image: `kernel528/alpine:3.23.3`
+- This repo tracks Python 3.14 on Alpine.
+- Upstream reference: https://github.com/docker-library/python/blob/master/3.14/alpine3.23/Dockerfile
 
-#### How To build Manually:
-``docker image build -t kernel528/python:3.13.1 -f 3.13/Dockerfile .``
-
-#### How to use:
--By default the image has a CMD set to run python2 or python3 depending on the image.  You can pass python logic as command input to the container, or simply run the container and it will present the python prompt.
+## Build
 ```
-docker run -it --rm --name python3 --hostname python3 kernel528/python:3.13.0
-Python 3.13.0 (main, Dec  8 2024, 17:27:43) [GCC 13.2.1 20240309] on linux
+docker image build -t kernel528/python:3.14.2 -f Dockerfile .
+```
+
+## Run
+- By default the image runs `python3`. You can pass python logic as command input to the container, or run it interactively.
+```
+docker run -it --rm --name python3 --hostname python3 kernel528/python:3.14.2
+Python 3.14.2 (main, ... ) [GCC ...] on linux
 Type "help", "copyright", "credits" or "license" for more information.
 >>> print("Hello World")
 Hello World
 >>> exit()
 ```
 
-### Authors
--**kernel528** - (kernel528@gmail.com)
+## Smoke test
+```
+docker run --rm kernel528/python:3.14.2 python --version
+docker run --rm kernel528/python:3.14.2 python - <<'PY'
+print("ok")
+PY
+```
+
+## Authors
+- **kernel528** - (kernel528@gmail.com)

@@ -27,3 +27,4 @@
 * v3.13.9 - Updated to python v3.13.9 and kernel528/alpine:3.22.2  Tagged:  kernel528/python:3.13.9
 * v3.14.0 - Updated to python v3.14.0 and kernel528/alpine:3.22.2  Tagged:  kernel528/python:3.14.0
 * v3.14.2 - Updated to python v3.14.2 and kernel528/alpine:3.22.2  Tagged:  kernel528/python:3.14.2
+* v3.14.2-3.23.3 - Updated base image to kernel528/alpine:3.23.3. Tagged: kernel528/python:3.14.2
