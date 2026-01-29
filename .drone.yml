@@ -23,7 +23,6 @@ steps:
         from_secret: docker_password
       repo: kernel528/python
       tags:
-        - latest
         - 3.14.2
         - 3.14.2-drone-build-${DRONE_BUILD_NUMBER}
 
@@ -96,6 +95,7 @@ steps:
       repo: kernel528/python
       tags:
         - ${DRONE_TAG}
+        - latest
 
   # Slack notification
   - name: slack-notification
