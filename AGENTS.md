@@ -8,11 +8,11 @@
 ## Build, Test, and Development Commands
 - Build locally:
   ```sh
-  docker build -t kernel528/python:3.14.2 -f Dockerfile .
+  docker build -t kernel528/python:3.14.6 -f Dockerfile .
   ```
 - Run a quick smoke test:
   ```sh
-  docker run -it --rm --name python3 kernel528/python:3.14.2 python --version
+  docker run -it --rm --name python3 kernel528/python:3.14.6 python --version
   ```
 
 ## Coding Style & Naming Conventions
