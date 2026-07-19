@@ -9,6 +9,10 @@
 - This repo tracks Python 3.14 on Alpine.
 - Upstream reference: https://github.com/docker-library/python/blob/master/3.14/alpine3.24/Dockerfile
 
+## Repository Relationships and Refresh Policy
+
+This independent image repository is coordinated by [`docker-workspace`](https://github.com/kernel528/docker-workspace) and uses [`kernel528/alpine`](https://github.com/kernel528/alpine-docker) as its custom base. Publish and verify the Alpine tag first, then rebuild, smoke-test, and release Python through this repository's own branch and tag workflow. Update [`docker-swarm`](https://github.com/kernel528/docker-swarm) only if a stack explicitly consumes the new Python image.
+
 ## Build
 ```
 docker image build -t kernel528/python:3.14.6-3.24.1_1 -f Dockerfile .
@@ -18,7 +22,7 @@ docker image build -t kernel528/python:3.14.6-3.24.1_1 -f Dockerfile .
 - By default the image runs `python3`. You can pass python logic as command input to the container, or run it interactively.
 ```
 docker run -it --rm --name python3 --hostname python3 kernel528/python:3.14.6-3.24.1_1
-Python 3.14.2 (main, ... ) [GCC ...] on linux
+Python 3.14.6 (main, ... ) [GCC ...] on linux
 Type "help", "copyright", "credits" or "license" for more information.
 >>> print("Hello World")
 Hello World
