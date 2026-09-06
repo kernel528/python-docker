@@ -23,45 +23,8 @@ steps:
         from_secret: docker_password
       repo: kernel528/python
       tags:
-        - 3.14.6
-        - 3.14.6-drone-build-${DRONE_BUILD_NUMBER}
-        - 3.14.6-3.24.1_1
-        - 3.14.6-3.24.1_1-drone-build-${DRONE_BUILD_NUMBER}
-
-  # Slack notification
-  - name: slack-notification
-    image: plugins/slack
-    when:
-      status:
-        - failure
-        - success
-    settings:
-      webhook:
-        from_secret: slack_webhook_drone_alerts
-
----
-
-kind: pipeline
-type: docker
-name: test-main-image
-
-trigger:
-  branch:
-    - main
-  event:
-    - push
-
-steps:
-  - name: main-docker-image-test
-    image: kernel528/python:latest
-    when:
-      branch:
-        - main
-      when:
-        - push
-    commands:
-      - cat /etc/alpine-release
-      - "python --version"
+        - pr-${DRONE_PULL_REQUEST}-build-${DRONE_BUILD_NUMBER}
+      dry_run: true
 
   # Slack notification
   - name: slack-notification
