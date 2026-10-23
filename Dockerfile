@@ -90,19 +90,19 @@ RUN set -eux; \
 				EXTRA_CFLAGS="${EXTRA_CFLAGS:-} -fno-omit-frame-pointer"; \
 				;; \
 		esac; \
-	make -j "$nproc" \
+	make -s -j "$nproc" \
 		"EXTRA_CFLAGS=${EXTRA_CFLAGS:-}" \
 		"LDFLAGS=${LDFLAGS:-}" \
 	; \
 # https://github.com/docker-library/python/issues/784
 # prevent accidental usage of a system installed libpython of the same version
 	rm python; \
-	make -j "$nproc" \
+	make -s -j "$nproc" \
 		"EXTRA_CFLAGS=${EXTRA_CFLAGS:-}" \
 		"LDFLAGS=${LDFLAGS:-} -Wl,-rpath='\$\$ORIGIN/../lib'" \
 		python \
 	; \
-	make install; \
+	make -s install; \
 	\
 	cd /; \
 	rm -rf /usr/src/python; \
