@@ -1,4 +1,4 @@
-FROM kernel528/alpine:3.24.1_1
+FROM kernel528/alpine:3.24.3_1
 
 LABEL maintainer=kernel528@gmail.com
 
@@ -15,8 +15,8 @@ RUN set -eux; \
 		tzdata \
 	;
 
-ENV PYTHON_VERSION 3.14.6
-ENV PYTHON_SHA256 143b1dddefaec3bd2e21e3b839b34a2b7fb9842272883c576420d605e9f30c63
+ENV PYTHON_VERSION 3.14.9
+ENV PYTHON_SHA256 e02d9ac21cebda6e46435369744a92c65cc7cd8669697694122cf97ffacd1e53
 
 RUN set -eux; \
 	\
@@ -25,6 +25,7 @@ RUN set -eux; \
 		bzip2-dev \
 		dpkg-dev dpkg \
 		findutils \
+		g++ \
 		gcc \
 		gdbm-dev \
 		gnupg \
@@ -70,7 +71,7 @@ RUN set -eux; \
 # set thread stack size to 1MB so we don't segfault before we hit sys.getrecursionlimit()
 # https://github.com/alpinelinux/aports/commit/2026e1259422d4e0cf92391ca2d3844356c649d0
 	EXTRA_CFLAGS="-DTHREAD_STACK_SIZE=0x100000"; \
-	LDFLAGS="${LDFLAGS:--Wl},--strip-all"; \
+	LDFLAGS="${LDFLAGS:-} -Wl,--strip-all"; \
 		arch="$(apk --print-arch)"; \
 # https://docs.python.org/3.12/howto/perf_profiling.html
 # https://github.com/docker-library/python/pull/1000#issuecomment-2597021615
@@ -98,7 +99,7 @@ RUN set -eux; \
 	rm python; \
 	make -j "$nproc" \
 		"EXTRA_CFLAGS=${EXTRA_CFLAGS:-}" \
-		"LDFLAGS=${LDFLAGS:--Wl},-rpath='\$\$ORIGIN/../lib'" \
+		"LDFLAGS=${LDFLAGS:-} -Wl,-rpath='\$\$ORIGIN/../lib'" \
 		python \
 	; \
 	make install; \
