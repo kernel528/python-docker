@@ -31,3 +31,4 @@
 * v3.14.6-3.24.1 - Updated to python v3.14.6 and kernel528/alpine:3.24.1. Tagged: kernel528/python:3.14.6
 * v3.14.6-3.24.1_1 - Rebuilt Python 3.14.6 on kernel528/alpine:3.24.1_1. Tagged: kernel528/python:3.14.6-3.24.1_1
 * v3.14.9-3.24.3_1 - Updated to Python 3.14.9 and kernel528/alpine:3.24.3_1. Tagged: kernel528/python:3.14.9-3.24.3_1
+* v3.14.9-3.24.3_3 - Refreshed base to kernel528/alpine:3.24.3_3. Tagged: kernel528/python:3.14.9-3.24.3_3
