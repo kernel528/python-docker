@@ -1,34 +1,90 @@
 kind: pipeline
 type: docker
-name: build-versioned-image
+name: python-rootless-image-validation
+
+node:
+  ci-role: rootless-image-smoke
+  platform: linux-amd64
 
 trigger:
+  repo:
+    - kernel528/python-docker
+  branch:
+    - '3.14'
+    - main
+  event:
+    - pull_request
+    - push
+    - custom
+
+steps:
+  - name: build-and-smoke
+    image: docker:27-cli
+    environment:
+      DOCKER_HOST: unix:///var/run/docker.sock
+      DOCKER_BUILDKIT: "0"
+    commands:
+      - scripts/ci-rootless-python-smoke.sh
+    volumes:
+      - name: podman-socket
+        path: /var/run/docker.sock
+
+volumes:
+  - name: podman-socket
+    host:
+      path: /run/user/1001/podman/podman.sock
+
+---
+
+kind: pipeline
+type: docker
+name: python-maintenance-candidate
+
+trigger:
+  repo:
+    - kernel528/python-docker
   branch:
     - '3.14'
   event:
-    - pull_request
+    - push
 
-# Build the docker image for amd64 architecture
-steps:
-  - name: version-docker-image-build
-    image: plugins/docker
+services:
+  - name: docker
+    image: docker:27.5.1-dind
+    privileged: true
     environment:
-      DOCKER_BUILDKIT: 1
-    settings:
-      platforms:
-        - linux/amd64
-      username:
-        from_secret: docker_username
-      password:
-        from_secret: docker_password
-      repo: kernel528/python
-      tags:
-        - 3.14.9
-        - 3.14.9-drone-build-${DRONE_BUILD_NUMBER}
-        - 3.14.9-3.24.3_1
-        - 3.14.9-3.24.3_1-drone-build-${DRONE_BUILD_NUMBER}
+      DOCKER_TLS_CERTDIR: ""
+    volumes:
+      - name: candidate-dockersock
+        path: /var/run
 
-  # Slack notification
+steps:
+  - name: build-and-smoke-candidate
+    image: docker:27.5.1-cli
+    environment:
+      DOCKER_HOST: unix:///var/run/docker.sock
+      PYTHON_IMAGE_REPO: kernel528/python
+    volumes:
+      - name: candidate-dockersock
+        path: /var/run
+    commands:
+      - scripts/ci-build-python-candidate.sh
+
+  - name: publish-candidate
+    image: docker:27.5.1-cli
+    environment:
+      DOCKER_HOST: unix:///var/run/docker.sock
+      PYTHON_IMAGE_REPO: kernel528/python
+      DOCKER_USERNAME:
+        from_secret: docker_username
+      DOCKER_PASSWORD:
+        from_secret: docker_password
+    volumes:
+      - name: candidate-dockersock
+        path: /var/run
+    commands:
+      - scripts/ci-publish-python-candidate.sh
+
   - name: slack-notification
     image: plugins/slack
     when:
@@ -39,31 +95,25 @@ steps:
       webhook:
         from_secret: slack_webhook_drone_alerts
 
+volumes:
+  - name: candidate-dockersock
+    temp: {}
+
 ---
 
 kind: pipeline
 type: docker
-name: test-main-image
+name: main-python-amd64
 
 trigger:
+  repo:
+    - kernel528/python-docker
   branch:
     - main
   event:
     - push
 
 steps:
-  - name: main-docker-image-test
-    image: kernel528/python:latest
-    when:
-      branch:
-        - main
-      when:
-        - push
-    commands:
-      - cat /etc/alpine-release
-      - "python --version"
-
-  # Slack notification
   - name: slack-notification
     image: plugins/slack
     when:
@@ -75,31 +125,67 @@ steps:
         from_secret: slack_webhook_drone_alerts
 
 ---
+
 kind: pipeline
 type: docker
-name: build-tagged-image
+name: python-immutable-release
 
+# Release tags are manually created from a reviewed main commit. Drone tag
+# events are not branch-associated; the build script validates tag metadata.
 trigger:
+  repo:
+    - kernel528/python-docker
   event:
     - tag
 
-# Build the docker image for the tagged release
-steps:
-  - name: tag-docker-image-build
-    image: plugins/docker
+services:
+  - name: docker
+    image: docker:27.5.1-dind
+    privileged: true
     environment:
-      DOCKER_BUILDKIT: 1
-    settings:
-      username:
-        from_secret: docker_username
-      password:
-        from_secret: docker_password
-      repo: kernel528/python
-      tags:
-        - ${DRONE_TAG}
-        - latest
+      DOCKER_TLS_CERTDIR: ""
+    volumes:
+      - name: release-dockersock
+        path: /var/run
 
-  # Slack notification
+steps:
+  - name: build-and-smoke-release
+    image: docker:27.5.1-cli
+    environment:
+      DOCKER_HOST: unix:///var/run/docker.sock
+      PYTHON_IMAGE_REPO: kernel528/python
+    volumes:
+      - name: release-dockersock
+        path: /var/run
+    commands:
+      - scripts/ci-build-python-release.sh
+
+  - name: check-immutable-tag-unused
+    image: docker:27.5.1-cli
+    environment:
+      DOCKER_HOST: unix:///var/run/docker.sock
+      PYTHON_IMAGE_REPO: kernel528/python
+    volumes:
+      - name: release-dockersock
+        path: /var/run
+    commands:
+      - scripts/ci-check-python-release-tag-unused.sh
+
+  - name: publish-immutable-release
+    image: docker:27.5.1-cli
+    environment:
+      DOCKER_HOST: unix:///var/run/docker.sock
+      PYTHON_IMAGE_REPO: kernel528/python
+      DOCKER_USERNAME:
+        from_secret: docker_username
+      DOCKER_PASSWORD:
+        from_secret: docker_password
+    volumes:
+      - name: release-dockersock
+        path: /var/run
+    commands:
+      - scripts/ci-publish-python-release.sh
+
   - name: slack-notification
     image: plugins/slack
     when:
@@ -109,3 +195,7 @@ steps:
     settings:
       webhook:
         from_secret: slack_webhook_drone_alerts
+
+volumes:
+  - name: release-dockersock
+    temp: {}
